@@ -1,0 +1,332 @@
+matthewmccullough   Class notes are ready at: http://teach.github.com/classnotes/2013-02-26-g...
+And will be expanded after class today.
+matthewmccullough   Morning Matt Yoho! Glad to have you here again helping us.
+Matt Y. Good morning!
+matthewmccullough   Class notes are all ready: http://teach.github.com/classnotes/2013-02-26-g...
+More will be added at the end of class today, but that's the canonical link.
+Jim A.  on a pull request- what if there are conflicts?
+Matt Y. Jim: If there are conflicts on a pull request, they will have to be resolved manually locally first, then have the merge commit that resolves them pushed up to the Pull Request branch.
+Matt Y. The PR will then apply cleanly and can be closed through the GitHub UI. But in practice those conflicts are relatively infrequent.
+Jim A.  thx
+matthewmccullough   Class notes are ready: http://teach.github.com/classnotes/2013-02-26-g...
+AL  Had to go into .git/config and change http to https to reset password to use HTTPS to push? Any ideas why?
+Bill    Thanks.
+Rajesh P.   Hello
+Good Morning
+Matt Y. AL: GitHub won't accept password-authenticated requests over non-SSL protected HTTP.
+Good morning, Rajesh.
+Justin C.   Will there be any information about deployment?
+matthewmccullough   http://training.github.com/web/git-foundations/
+Ilya    were any notes emailed yesterday? i haven't received anything
+Matt Y. Course notes for yesterday and today: http://teach.github.com/classnotes/2013-02-26-g...
+Ilya    thank you
+Matt Y. Np!
+Daniel K.   Do you have a transcription of yesterday's chat?
+Matt Y. Daniel: I'm afraid not, I think. The free Campfire rooms don't track transcripts. Sorry!
+Daniel K.   Bummer. That was one benefit of the GoToMeeting chat room.
+Seth    If I reset --hard HEAD why would my branch be ahead of master by 1 commit still?
+Bill    How do I get my Mac Terminal to use same colors as Matthew's.
+Matt Y. Seth: If you haven't pushed that HEAD commit up to GitHub yet, your local repo will still be one commit ahead.
+matthewmccullough   http://teach.github.com/articles/shell-prompts/
+Daniel K.   Terrific. Thx.
+Matt Y. Sorry for the misinformation!
+Daniel K.   np
+Phillip J 
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#   new file:   mycontact.txt
+#   deleted:    philwinkle.txt
+#
+ahhhh i removed more than one line of a 5 line file
+Rajesh P.    copy of same file to a different name and move the file to a different name
+matthewmccullough   git log --stat
+Matt Y. Questions!
+Rajesh P 
+ first.txt => t/first.txt   | 4 ++++
+ second.txt => t/second.txt | 0
+ second.txt => third.tx     | 0
+ 3 files changed, 4 insertions(+)
+Randy C.    how long does it stay in effect.
+Matt Y. Randy: How long does the metadata recalculation in the log listing stay in effect?
+It's a one-time thing, it isn't cached or stored.
+So every time you want to see that view of the history you have to specify the flags.
+Randy C.    if I use -C once do I have to keep using it?
+Matt Y. Yep, you do.
+But you only need it when you want to see that "perspective" on the history.
+Randy C.    ok he said 'turns on' and thought it was forever.
+Matt Y. Right, gotcha. No, that was just a slightly loose manner of speaking.
+Bill    Do you have a document that list all the optional command line parameters for a command (i.e. -u, -A, etc)?
+Ruben M.    I assume that git reset --hard is not undoable. correct?
+Matt Y. Bill: One quick reference in addition to the only documentation, Git comes with traditional man pages.
+matthewmccullough   http://git-scm.com/docs/git-add/1.7.5
+Matt Y. Looking up specific commands takes a specific form. To check the documentation, including all the flags, for say `git log`, you would check `man git-log`.
+matthewmccullough   http://teach.github.com/cheatsheets/
+http://teach.github.com/articles/git-cheatsheets/
+Matt Y. Ruben: A `git reset --hard` isn't really undoable, no.
+Jeff K. Bill: man pages are usually accessible via the --help flag as well (tho for some reason this doesnt work on my windows installation): git add --help (or generically: git <command> --help)
+Alejandro G.    offtopic: how can you know what is going to be update by a git pull command?
+Daniel K.   git log origin/master..master
+Alejandro G.    nice
+Matt Y. Daniel: That's a good thought, but doesn't quite work.
+Daniel K.   Oops < sorry that's going to tell what will be pushed
+Matt Y. What Matthew is talking about now is related to Alejandro's question.
+We'll make sure to address it in a moment when Matthew finishes his point.
+matthewmccullough   git reset --hard origin/master
+Alejandro G.    nice fetch is was i was looking for :D
+Richard S.  so is it just changing what is "head" then?
+Matt Y. Richard S: Not exactly. HEAD refers to the latest commit in your current branch. What `fetch` does is pull over the local copies of the remote branches that mirror your local ones.
+Phillip J.  so, git fetch requires me to still have to git pull
+Daniel K.   If I do something like switch core.autocrlf from true to false, what would I need to do to ensure my local working files are adjusted accordingly? A new clone?
+Richard S.  ah I see
+Matt Y. Phillip: It turns out that git pull is a shortcut for git fetch and another command, git merge. We'll take in more detail a bit later.
+*talk
+Phillip J.  ok thank you
+Pream T 
+# On branch master
+# Your branch is behind 'origin/master' by 3 commits, and can be fast-forwarded.
+#
+Matt Y. Daniel: Let me get back to you on that in a few, I want to make sure we follow up on the question Alejandro raised earlier.
+But in short, changing a setting like that will only affect files you change and commit, not files already in the repo.
+David R.    what is the difference between git fetch and git remote update (is there any?)
+Cheri V.    After a git fetch, I do a git pull and it says everything is already up to date.
+Matt Y. David: With only one remote, they're equivalent.
+AL  After Fetch, wouldn't it be good to do a diff?
+Matt Y. AL: You may want to do that, but even with a conflict, you will probably have to merge it.
+In practice it's okay to skip that.
+David R.    After git merge, I got: fatal: No commit specified and merge.defaultToUpstream not set.
+Matt Y. David: Could you paste the command you ran?
+David R.    I edited fix.txt in the browser, committed, it, then: git fetch
+then git merge
+Matt Y. Alejandro asked a few moments ago, "how can you know what is going to be updated by a git pull command?"
+Daniel K.   David do: git merge origin/master
+jcamou  is it a good practice to always do a pull before push?
+David R 
+> git status
+# On branch master
+# Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+#
+nothing to commit, working directory clean
+git merge origin/master
+Justin C.   Can you give a quick example of why you'd want to do a fetch instead of a pull?
+Bill    So Origin is Remote, not Upstream. Correct?
+Alejandro G.    ok understood, thx for the clarification matt
+Matt Y. Justin: Primarily if you wanted to review what would be automatically merged in by running pull.
+jcamou: Yes, it is; though if you haven't done a pull, and there are changes on the remote, your push will be rejected with a message telling you to pull.
+jcamou  Thank you, Matt.
+Justin C.   Thanks
+Matt Y. Bill: origin is the name of the primary/default remote.
+"Upstream" is a general term referring to a remote.
+Daniel K.   Wasn't prompted but using new version.
+git version 1.8.1.msysgit.1 
+$ git pull
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2)
+Unpacking objects: 100% (3/3), done.
+From https://github.com/dankirkd/hellogitworld
+   9f6b991..e394d83  master     -> origin/master
+Updating 9f6b991..e394d83
+error: Your local changes to the following files would be overwritten by merge:
+		Copyofother1.txt
+Please, commit your changes or stash them before you can merge.
+Aborting
+Jon G.  I have the same and wasn't prompted.
+jcamou  what would´ve happened if both changes were done at the bottom?
+Pream T.    may it be a windows/powershell thing?
+AL  Auto-merging... cursor is just hung in console
+Editing done and saved.
+ah
+was it
+matthewmccullough   git log --graph --pretty=oneline --abbrev-commit --decorate --all -5
+Richard S.  Matt, my merge failed, it says "Automatic merge failed; fix conflicts and then commit results."
+Matt Y. Richard: It may be the case that the files were changed in the same place in the remote and local versions.
+Matt Y. If you run git diff now, what does it look like?
+Daniel K.   How do I merge?
+Richard S.  it shows the changes of my one liner on local and the change on server
+Daniel K 
+$ git merge origin/master
+Updating 9f6b991..e394d83
+error: Your local changes to the following files would be overwritten by merge:
+		Copyofother1.txt
+Please, commit your changes or stash them before you can merge.
+Aborting
+David R.    in that git log graph output, origin/master and origin/head are red, does that mean anything?
+Matt Y. David: No, there's no special meaning to those colors.
+Daniel K.   Duh!
+David R.    okay good.
+AL  difference between origin/master origin/HEAD in log --graph?
+jcamou  how do you set the default branch on the cli_
+?
+copy.
+Matt Y. Richard: You could paste the output of the diff if you'd like.
+Richard S.  sure
+Richard S 
+$ git diff
+diff --cc fix.txt
+index a30ffa5,ba3cc83..0000000
+--- a/fix.txt
++++ b/fix.txt
+@@@ -1,3 -1,4 +1,8 @@@
+  Trainer making changes
+  JUNK ON
+++<<<<<<< HEAD
+ +this was done on local
+++=======
++ This is done serverside
++ put something bottom on serverside
+++>>>>>>> e3364b8777e0408a77f0fb36ea19a541697630ed
+Alejandro G.    so if my default branch in server is master, origin/master == origin/HEAD?
+Richard S.  in this case is it best to just reset my changes since changes locally are in the same spot as server?
+Matt Y. Richard: The local change needed to be the very top line to avoid the conflict. Those changes weren't on the same line, but were close enough for git to consider them a potential conflict.
+Alejandro: Yep.
+Randy C.    What does this mean 
+error: The requested URL returned error: 403 while accessing https://github.com/
+githubtraining/hellogitworld.git/info/refs
+fatal: HTTP request failed
+Richard S.  ok thanks
+Matt Y. Richard: As Matthew just said, you can just wait a bit. :-)
+Richard S.  :)
+Alejandro G.    403 is forbidden
+Randy C.    Is that a standard http error number?
+Matt Y. Randy: Yep.
+Richard S.  i had that yesterday Alejandro , are you using your fork?
+Alejandro G.    yep
+Matt Y. Randy: That is possibly happening because your remote is set up with an http url instead of https.
+You can look in the contents of ./.git/config to inspect the remote URL.
+I'll be back after the break.
+Nazila N.   Randy: had the problem yesterday which was resolved for me by adding adding my "username@github.com/...." in the URL line in for .git/config
+Daniel K.   Maybe this can be asked now? ... If I do something like switch core.autocrlf from true to false, what would I need to do to ensure my local working files are adjusted accordingly? A new clone?
+Right
+Right
+You're confirming my thinking.
+thx
+We made the mistake of choosing true and our whole team needs to make the switch
+jcamou  commit -a is add_
+?
+Matt Y. jcamou: Yep.
+jcamou  beautiful.
+Matt Y. It's simple add, no flags.
+Matt Y. Red + blue == purple :-D
+Ruben M.    There are some pretty sophisticated apps that help you resolve conflicts, such as BeyondCompare. How can we use them?
+Matt Y. Ruben: Matthew is going to talk about using graphical merge tools shortly.
+matthewmccullough   git difftool --tool-help
+Randy C.    we saw a diagram of local & remote but where does base fit into to this picture?
+Ruben M.    thx
+matthewmccullough   https://github.com/matthewmccullough/dotfiles
+Bill    Does SmartGib or Tower include diff/merge tools with comparable functionality? How about IDE diff/merge tools?
+Cheri V.    For people who have to deal with a large number of merge conflicts (merging two versions of an OS for example), is there a way to "farm out" the merge conflicts so that multiple people can help resolve them?
+Bill    Do the IDEs (i.e. IntelliJ) have visual diff/merge tool that is comparable to Araxis?
+Thank you.
+Daniel K.   Modified date in Windows changes.
+Jim A.  what did she say?
+sorry, *he
+nvm, I saw it
+Nazila N.   sorry - what was "-u" switch ? (in push)
+Phillip J.  so it's possible to publish a local branch to a different origin branch name
+what's the use case for that
+Matt Y. Nazila: It tells git to remember the remote branch you pushed to, so that pulls will work afterward.
+Nazila: It tells the local branch you are pushing to "track" the remote branch you're creating in the future.
+Nazila N.   thanks Matt
+Matt Y. Nazila: You're welcome. Feel free to ask for further clarification.
+Phillip J.  could you show your zsh history once
+one more time
+Bill    Could you clarify what is "origin", the local cache of GitHub or actually GitHub?
+matthewmccullough 
+10109  git branch featurework2
+10112  git add -u .
+10114  git commit -m"Deleted all of the things"
+10115  git branch
+10116  git status
+10120  git checkout -b iwanttotrythisthing
+10122  git branch -d iwanttotrythisthing
+10123  git checkout featurework2
+10124  git push -u origin featurework2
+10125  git checkout master
+10126  git merge featurework2
+10127  git push
+Bill    Thank you.
+Phillip J.  can we alias that
+e.g. another remote with a name other than origin
+Matt Y. Phillip: You can rename remotes if you like. "origin" is the default name for the first remote.
+Phillip J.  thanks
+matthewmccullough   git config --global alias.logfive ="log --graph --pretty=oneline --abbrev-commit --decorate --all -5"
+John H. git config --global alias.logfive ="log --graph --pretty=oneline --abbrev-commit --decorate --all -5"
+Sorry
+jcamou  white space
+matthewmccullough   git config --global alias.logfive "log --graph --pretty=oneline --abbrev-commit --decorate --all -5"
+Daniel K.   Removing an alias?
+Bill    When I typed your original version a small blue bird starting flying on my screen. How do I turn it off?
+Just Joking...
+Alejandro G.    you can open the .gitconfig to inspect it and add there what you want or remove it
+matthewmccullough   https://githubtraining.campfirenow.com/7051f
+Daniel K.   Looks like: git config --global --unset alias.s
+Daniel K.   Can you use rebasing to change the commit comment of an older commit (not just the last)?
+Matt Y. Daniel: Yep!
+AL  should we rebase before pushing to origin?
+Jim A.  rebasing will combine all of your local commits?
+Daniel K.   fix your repo
+Matt Y. Jim: That *can* be done, but isn't the default.
+Seth    not sure I understand the rebase before sharing... why shouldn't I rebase a branch, commit, push, and alert coworkers to pull the newly rebased branch?
+Matt Y. Seth: Because rebasing changes the history of commits, you would cause your coworkers later changes to be conflicts, as well as potentially duplicate commits.
+Seth: Once a commit has been shared, it shouldn't be changed.
+Alejandro G.    ok pple i have to leave now, its been a great learning time. Cheers all and keep the good work comming!
+Matt Y. Seth: Now, it *is* possible to "pull and rebase" but in general that workflow takes a lot more diligence than its payoff.
+Alejandro: Thanks for participating!
+Seth    so how might two separate people work on a long term feature branch (that will at some point involve a rebase before merge)?
+Alejandro G.    thx for all, matt and matthew both of you are good teachers hope we can meet in the advanced course :D!
+Matt Y. Alejandro: Thanks! See you around.
+Daniel K.   Why do people bad mouth using "git stash"?
+Phillip J.  this.
+Daniel K.   Isn't is like creating a local branch?
+Phillip J.  can we effectively pop 4 or 5 working ideas into the same branch
+or do they overwrite each other
+k
+Daniel K.   git branch will show a generic branch
+I love git stash
+Phillip J.  can you cat a stash and port it to another box, say like my laptop
+gotcha
+Daniel K.   So you can git reset --hard MYTAG
+Ruben M 
+I have a general question:
+How secure is the code in GitHub? I understand there is no encrypt option or something like that, at least for some files.
+Daniel K.   This is only available from GitHub, not just any Git repo, right?
+Matt Y. --show-signature
+Cheri V.    Is there any help for how to merge from svn to git while preserving history?
+Daniel K.   How to create a branch from a tag?
+Rajesh P.   is there a advanced class too ?
+Jeff K. Great training. Thanks fellas.
+David R.    see you for the advanced class
+Daniel K.   :thumbsup
+Ruben M.    Excellent class
+matthewmccullough   http://help.github.com/security/
+Tom H.  Is it possible to delete repositories? I belive locally you can remove the .git file and/or the directory- but server side?
+David R.    Rajesh: http://training.github.com/web/advanced-git/
+Matt Y. Daniel: Which feature were you asking about, whether or was a git or GitHub feature?
+Tom H.  Thanks.
+Bill    When using IDE git integration, do you switch (and create a new branch) from inside the IDE, or do you need to do it outside IDE?
+Daniel K.   Matt < the SVN trick
+Matt Y. Bill: You can do it either way.
+Daniel K.   Matthew, thx
+Matt Y. Daniel: Gotcha. Any SVN repo can be converted to a git repo, it's just a matter of processing.
+Dan If I need to go back to a previously commit in a branch, several commits ago, how do I do that?
+Bill    Thank you. I'm assuming that's also true for IntelliJ?
+Thank you.
+Matt Y. Daniel: It's also possible and pretty common to create a git repo locally and then push it up to GitHub.
+Cheri V.    Is there a good reference for how to convert from svn to git while preserving history?
+Dan how about both? :)
+Daniel K.   I meant, can you "svn checkout" from any git repo, or only from a GitHub repo?
+Bill    Thank you for all the hard work in preparing and delivering this class. Very much appreciated.
+Matt Y. Cheri: Here's a helpful article on SVN => git conversion https://help.github.com/articles/importing-from...
+Bill: On behalf of Matthew, thank you, and thanks for participating.
+Nazila N.   Thank you very much to both of you.
+Jim A.  thx guys!
+Wouter K.   Thanks, great info! See you for the advanced class.
+Matt Y. Daniel: Oh, my mistake. Yes, that's a GitHub feature. It may be replicated elsewhere but isn't standard.
+matthewmccullough   http://teach.github.com/classnotes/2013-02-26-g...
+Richard S.  much thanks. Matthew and Matt!
+Justin C.   Thanks!
+Matt Y. Thanks everyone, enjoy your day!
+matthewmccullough   It was our pleasure to be able to share Git and GitHub knowledge with you.
+Thanks for giving us your time!
