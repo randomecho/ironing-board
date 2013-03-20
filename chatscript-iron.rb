@@ -20,7 +20,7 @@
 @name_breather    = 3         # Minimum characters to separate a user and their message
 @dialogue_marker  = ''        # What to use to separate username and message line with
 @leader_marker    = ' '       # Characters to fill void between username and message
-@output_folder    = './'        # Include the trailing directory separator
+@output_folder    = './'      # Include the trailing directory separator
 @dir_separator    = '/'
 @output_suffix    = '-ironed'
 
